@@ -5,6 +5,6 @@
 </div>
 <p class="options">
 <a href="{{ url_for('history', article_name=title) }}">History</a> 
-<a href="{{ url_for('edit', article_name=title) }}" class="edit_link">Edit this article</a> <a href="{{ url_for('confirm_delete', article_name=title) }}">Delete this article</a></p>
+<a href="{{ url_for('edit', article_name=title) }}" class="edit_link">Edit</a> <a href="{{ url_for('confirm_delete', article_name=title) }}">Delete</a></p>
 
 {% endblock %}
