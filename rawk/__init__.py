@@ -121,7 +121,7 @@ def save():
             'date': str(datetime.now()),
             'content': content
         }
-        g.r.lpush('article:%s:history', json.dumps(history))
+        g.r.lpush('article:%s:history' % article_name, json.dumps(history))
         if new:
             g.r.lpush('articles', article_name)
         flash('Saved article "%s".' % article_name)
@@ -134,6 +134,16 @@ def save():
         new=new,
         content=content
     )
+
+
+@app.route('/history/<string:article_name>')
+def history(article_name):
+    history = []
+    for item in g.r.lrange('article:%s:history' % article_name, 0, -1):
+        history.append(json.loads(item))
+    return render_template('history.html',
+        history=history,
+        title=article_name)
 
 
 @app.route('/edit/<string:article_name>')

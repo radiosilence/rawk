@@ -1,0 +1,7 @@
+{% extends 'main.html' %}
+{% block content %}
+    <h1>{{ title }} - History</h1>
+    {% for item in history %}
+        <p>Date: {{ item['date'] }}</p>
+    {% endfor %}
+{% endblock %}
