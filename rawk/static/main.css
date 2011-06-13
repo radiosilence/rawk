@@ -46,6 +46,8 @@ header {
     padding-bottom: .2em;
     padding-top: .1em;
     width: 100%;
+    display: block;
+    overflow: hidden;
 }
 
 header h1 a, header h1 a:visited, header h1 a:hover {
