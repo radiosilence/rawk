@@ -45,6 +45,7 @@ header {
     margin-top: 0px;
     padding-bottom: .2em;
     padding-top: .1em;
+    width: 100%;
 }
 
 header h1 a, header h1 a:visited, header h1 a:hover {
