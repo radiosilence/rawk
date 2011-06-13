@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>List of Articles</h1>
+<ul>
+{% for article in articles %}
+<li><a href="{{ url_for('article', article_name=article) }}">{{ article }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

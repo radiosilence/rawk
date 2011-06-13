@@ -1,0 +1,7 @@
+{% extends 'main.html' %}
+{% block content %}
+ <p>Are you sure you wish to delete article "{{ article_name }}"?</p>
+ <p><a href="{{ url_for('delete', article_name=article_name) }}">Yes</a>
+  <a href="{{ url_for('article', article_name=article_name) }}">No</a>
+ </p>
+{% endblock %}

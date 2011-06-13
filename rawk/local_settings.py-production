@@ -1,4 +1,5 @@
 # Default Configuration
+WIKI_NAME = '(prod) Default Wiki Title'
 DEBUG = False
 SECRET_KEY = 'TEST KEY'
 UPLOADED_AVATARS_DEST = 'wire/static/img/avatar'

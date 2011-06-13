@@ -1,0 +1,33 @@
+{%- macro flashes() %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if category == 'error' %}
+          <div class="flash error">{{ message }}</div>
+        {% else %}
+          <div class="flash"></span>{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+{% endmacro -%}
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}" type="text/stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+  <title>{{ title }} - {{ g.WIKI_NAME }} - rawk</title>
+ </head>
+ <body>
+  <header>
+   <h1><a href="{{ url_for('home') }}">{{ g.WIKI_NAME }}</a>
+   <a href="{{ url_for('new') }}" class="new">[new article]</a></h1>
+  </header>
+  <div id="wrapper">
+   <h1>{{ title }}</h1>
+   {{ flashes() }}
+   <div id="content">{% block content %}{% endblock %}</div>
+  </div>
+  </body>
+</html>

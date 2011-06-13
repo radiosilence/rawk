@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="article">
+{{ content|markdown }}
+</div>
+<p class="options"><a href="{{ url_for('edit', article_name=title) }}" class="edit_link">Edit this article</a> <a href="{{ url_for('confirm_delete', article_name=title) }}">Delete this article</a></p>
+
+{% endblock %}

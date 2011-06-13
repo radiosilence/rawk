@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+ <form method="POST", action="{{ url_for('save') }}">
+
+ {% if new %}
+  {% if title == '' %}
+   <p>Name your article, give it some content, then click save.</p>
+  {% else %}
+   <p>This article does not exist. You can create it by typing in some content and hitting save.</p>
+  {% endif %}
+  <p><label for="article_name">Article Name</label><br/>
+   <input type="text" name="article_name" value="{{ title }}" />
+  </p>
+  {% else %}
+  <input type="hidden" name="article_name" value="{{ title }}"/>
+ {% endif %}
+   <input type="hidden" name="new" value="{{ new }}" />
+   <p><label for="content">Content</label><br/>
+    <textarea id="content" name="content">{{ content }}</textarea>
+   </p>
+   <p><input type="submit" value="Save"/></p>
+  </form>
+{% endblock %}
