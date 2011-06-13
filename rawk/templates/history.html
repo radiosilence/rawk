@@ -1,8 +1,11 @@
 {% extends 'main.html' %}
 {% block content %}
     <h1>{{ title }} - History</h1>
+    <ul>
     {% for item in history %}
-        <p>Date: <a href="{{ url_for('history_entry', article_name=title,
-            entry=item['index']) }}">{{ item['date'] }}</a></p>
+        <li><a href="{{ url_for('history_entry', article_name=title,
+            entry=item['index']) }}">{{ item['date'] }}</a>
+            {%- if item['index'] == 0 %} (Current){% endif %}</li>
     {% endfor %}
+    </ul>
 {% endblock %}
