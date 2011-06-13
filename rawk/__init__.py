@@ -38,6 +38,17 @@ redis_connection = redis.Redis(
 )
 
 
+if not app.debug:
+    file_handler = FileHandler('error.log', encoding="UTF-8")
+    file_handler.setLevel(logging.WARNING)
+    file_handler.setFormatter(Formatter(
+        '%(asctime)s %(levelname)s: %(message)s '
+        '[in %(pathname)s:%(funcName)s:%(lineno)d]'
+    ))
+    app.logger.addHandler(file_handler)
+    print "Added log handler."
+
+
 @app.before_request
 def before_request():
     g.WIKI_NAME = app.config['WIKI_NAME']
