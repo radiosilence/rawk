@@ -113,6 +113,8 @@ def save():
     try:
         if '/' in article_name:
             raise Exception('Please do not use slashes in article name.')
+        if ':' in article_name:
+            raise Exception('Please do not use colons in article name.')
         if len(article_name) < 1:
             raise Exception('Article name must be one character or more.')
         g.r.set('article:%s' % article_name, content)
