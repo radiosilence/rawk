@@ -3,6 +3,9 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 from flaskext.markdown import Markdown
 
+import logging
+from logging import Formatter, FileHandler
+
 import json
 import redis
 
