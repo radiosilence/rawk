@@ -1,7 +1,14 @@
 {% extends 'main.html' %}
 {% block content %}
  <form method="POST", action="{{ url_for('save') }}">
-
+ {% if archive == True %}
+  <p class="archivewarn">This is an archived, historical version of the post.
+    Under no circumstances save this unless you are sure you wish to restore this version.</p>
+  <p><strong>Preview:</strong></p>
+  <div class="article preview">
+   {{ content|markdown }}
+  </div>
+ {% endif %}
  {% if new %}
   {% if title == '' %}
    <p>Name your article, give it some content, then click save.</p>

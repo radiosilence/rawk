@@ -139,10 +139,27 @@ def save():
 @app.route('/history/<string:article_name>')
 def history(article_name):
     history = []
+    i = 0
     for item in g.r.lrange('article:%s:history' % article_name, 0, -1):
-        history.append(json.loads(item))
+        itm = json.loads(item)
+        itm['index'] = i
+        history.append(itm)
+        i += 1
     return render_template('history.html',
         history=history,
+        title=article_name)
+
+
+@app.route('/history/<string:article_name>/<int:entry>')
+def history_entry(article_name, entry):
+    try:
+        history = json.loads(
+            g.r.lrange('article:%s:history' % article_name, entry, entry)[0])
+    except IndexError:
+        abort(404)
+    return render_template('edit.html',
+        archive=True,
+        content=history['content'],
         title=article_name)
 
 
