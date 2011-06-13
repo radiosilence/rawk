@@ -6,6 +6,7 @@ from flaskext.markdown import Markdown
 import logging
 from logging import Formatter, FileHandler
 
+from datetime import datetime
 import json
 import redis
 
@@ -78,7 +79,10 @@ def list():
 def dump():
     articles = {}
     for a in g.r.lrange('articles', 0, -1):
-        articles[a] = g.r.get('article:%s' % a)
+        articles[a] = {
+            'current': g.r.get('article:%s' % a),
+            'history': g.r.get('article:%s:history' % a)
+        }
     return json.dumps(articles)
 
 
@@ -112,6 +116,12 @@ def save():
         if len(article_name) < 1:
             raise Exception('Article name must be one character or more.')
         g.r.set('article:%s' % article_name, content)
+
+        history = {
+            'date': str(datetime.now()),
+            'content': content
+        }
+        g.r.lpush('article:%s:history', json.dumps(history))
         if new:
             g.r.lpush('articles', article_name)
         flash('Saved article "%s".' % article_name)
