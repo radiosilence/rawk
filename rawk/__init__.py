@@ -74,6 +74,14 @@ def list():
         articles=g.r.lrange('articles', 0, -1))
 
 
+@app.route('/dump')
+def dump():
+    articles = {}
+    for a in g.r.lrange('articles', 0, -1):
+        articles[a] = g.r.get('article:%s' % a)
+    return json.dumps(articles)
+
+
 @app.route('/config/<string:article_name>')
 def confirm_delete(article_name):
     return render_template('confirm.html',
