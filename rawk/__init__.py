@@ -114,7 +114,7 @@ def save():
         g.r.set('article:%s' % article_name, content)
         if new:
             g.r.lpush('articles', article_name)
-        flash('Saved %s.' % article_name)
+        flash('Saved article "%s".' % article_name)
         return redirect(url_for('article', article_name=article_name))
     except Exception as e:
         flash(str(e), 'error')
